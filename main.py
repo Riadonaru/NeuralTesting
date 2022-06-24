@@ -6,9 +6,9 @@ import torch
 import data
 from classes import PATH, r
 
-LOAD_PATH = "./networks/94.15.pth"
+LOAD_PATH = "./networks/asd.pth"
 SCORE = 0
-DISPLAY_GUI = True  # Considerabley slower when set to True!
+DISPLAY_GUI = False  # Considerabley slower when set to True!
 TEST_WITH_TRAINING_IMAGES = False
 # match str(type(r)):
 #     case "<class 'classes.Recognizer'>":
@@ -69,6 +69,7 @@ def evaluate(ten: torch.Tensor, target: str):
 
 if __name__ == "__main__":
     ans1 = input("Train?[y/N] ") == "y"
+    FIG = plt.gcf()
     if TEST_WITH_TRAINING_IMAGES:
         NUM_OF_IMAGES = data.load(TEST_WITH_TRAINING_IMAGES)
     else:
@@ -106,14 +107,13 @@ if __name__ == "__main__":
         img, target = next(hum_gen)
         inpt = next(bot_gen)[0]
         if DISPLAY_GUI:
-            FIG = plt.gcf()
             DISP = plt.imshow(
                 img,
                 cmap="gist_gray",
             )
+            FIG.canvas.manager.set_window_title(target)
         print("[1 / %s]" % (NUM_OF_IMAGES))
         pred = evaluate(inpt, target)
-        FIG.canvas.manager.set_window_title(target)
         if pred == target:
             SCORE += 1
         if not ans:

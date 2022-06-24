@@ -10,7 +10,9 @@ class Recognizer(nn.Module):
     def __init__(self):
         super(Recognizer, self).__init__()
         self.sequential = nn.Sequential(
-            nn.Linear(784, 30),
+            nn.Linear(784, 40),
+            nn.ReLU(),
+            nn.Linear(40, 30),
             nn.ReLU(),
             nn.Linear(30, 20),
             nn.ReLU(),
