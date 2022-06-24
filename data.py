@@ -1,7 +1,3 @@
-from cProfile import label
-import threading
-from time import sleep
-
 import matplotlib.pylab as plt
 import numpy as np
 import torch
@@ -43,26 +39,10 @@ def load(train: bool = True):
         print("---Reading Images---")
         data = f.read()
         num_of_images = int.from_bytes(data[4:8], "big")
-        IMAGES = np.array_split(
-            np.array([change_scale(i) for i in data[16:]]), num_of_images
-        )
+        IMAGES = np.array_split(np.array([i for i in data[16:]]), num_of_images)
 
     with open(label_file, "rb") as f:
         print("---Reading Labels---")
         LABELS = f.read()[8:]
 
     return num_of_images
-
-
-FIG = plt.gcf()
-
-
-# #### Miscellaneous functions
-# def sigmoid(z):
-#     """The sigmoid function."""
-#     return 1.0 / (1.0 + np.exp(-z))
-
-
-# def sigmoid_prime(z):
-#     """Derivative of the sigmoid function."""
-#     return sigmoid(z) * (1 - sigmoid(z))
