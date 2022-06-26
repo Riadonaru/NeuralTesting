@@ -6,9 +6,9 @@ import torch
 import data
 from classes import PATH, r
 
-LOAD_PATH = "./networks/asd.pth"
+LOAD_PATH = "./networks/96.7.pth"
 SCORE = 0
-DISPLAY_GUI = False  # Considerabley slower when set to True!
+DISPLAY_GUI = True  # Considerabley slower when set to True!
 TEST_WITH_TRAINING_IMAGES = False
 # match str(type(r)):
 #     case "<class 'classes.Recognizer'>":
